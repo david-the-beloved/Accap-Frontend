@@ -1,0 +1,91 @@
+.readerSurface {
+  height: 100%;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.chapterBar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: var(--surface-soft);
+}
+
+.chapterBar strong {
+  font-weight: 600;
+}
+
+.currentPage {
+  margin-left: auto;
+  color: var(--text-muted);
+}
+
+.pageShell {
+  /* Fixed-height scrollable viewport for the book. The height can be
+     be tuned from the parent using the --pdf-viewer-height CSS variable.
+     Default matches a compact reader area so the book stays inside a
+     small box while remaining scrollable. */
+  height: var(--pdf-viewer-height, 560px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.pageWrapper {
+  width: min(100%, 920px);
+  display: grid;
+  justify-items: center;
+}
+
+.pageShell :global(.react-pdf__Page) {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(33, 46, 38, 0.12);
+}
+
+.pageShell :global(.react-pdf__Page__canvas) {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.pageShell :global(.react-pdf__Page__textContent) {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.pageShell :global(.react-pdf__Page__textContent) :global(.persistent-highlight) {
+  /* Use a true inline background so text metrics remain unchanged and
+     highlights are stable across wrapped lines. Disable any transforms
+     applied by the PDF text layer to avoid visual offset/glitches. */
+  display: inline;
+  background: rgba(91, 152, 116, 0.35);
+  padding: 0 0.06em;
+  border-radius: 2px;
+  line-height: inherit;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  vertical-align: baseline;
+  transform: none !important;
+  box-shadow: none !important;
+  transition: background-color 140ms ease;
+}
+
+.error {
+  margin: 16px;
+  border-radius: 12px;
+  background: rgba(159, 58, 58, 0.12);
+  color: #8b3131;
+  padding: 12px;
+}

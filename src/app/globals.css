@@ -1,13 +1,19 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --text: #1e2422;
+  --text-muted: #66706b;
+  --surface: #ffffff;
+  --surface-soft: #f6f8f6;
+  --line: #d8dfdb;
+  --line-strong: #b8c3bd;
+  --accent: #1d5c43;
+  --accent-soft: #e8f1ec;
+  --danger: #9f3a3a;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --shadow-soft: 0 18px 40px rgba(22, 36, 28, 0.08);
+  --font-heading: var(--font-newsreader), Georgia, serif;
+  --font-body: var(--font-manrope), "Segoe UI", sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), "Courier New", monospace;
 }
 
 html,
@@ -17,11 +23,15 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 16% -12%, rgba(92, 129, 108, 0.14), transparent 32%),
+    radial-gradient(circle at 92% 0%, rgba(191, 203, 196, 0.2), transparent 22%),
+    linear-gradient(180deg, #f4f6f4, #f7f9f7 42%, #f3f5f3);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
 }
 
 * {
@@ -35,8 +45,80 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+}
+
+.auth-shell {
+  min-height: 100dvh;
+  padding: 22px;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.top-nav .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.top-nav a,
+.top-nav button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 7px 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  background: rgba(31, 59, 46, 0.08);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(29, 92, 67, 0.45);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

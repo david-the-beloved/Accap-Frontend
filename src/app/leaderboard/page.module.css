@@ -1,0 +1,42 @@
+.page {
+  min-height: 100dvh;
+  padding: 18px;
+}
+
+.card {
+  border-radius: 20px;
+  border: 1px solid rgba(11, 61, 91, 0.2);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 20px;
+  box-shadow: 0 14px 44px rgba(11, 61, 91, 0.16);
+}
+
+.card p {
+  margin-top: 4px;
+  color: rgba(11, 61, 91, 0.82);
+}
+
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.card th,
+.card td {
+  text-align: left;
+  border-bottom: 1px solid rgba(11, 61, 91, 0.15);
+  padding: 10px;
+}
+
+.card th {
+  font-family: var(--font-ibm-plex-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.error {
+  margin-top: 8px;
+  color: #8f1f1f;
+}
