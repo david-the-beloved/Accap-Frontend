@@ -1,5 +1,5 @@
 export const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:8000/api/v1";
+  process.env.NEXT_PUBLIC_API_BASE ?? "https://accap-backend.fly.dev/api/v1";
 
 export type AuthResponse = {
   access_token: string;
