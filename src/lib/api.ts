@@ -40,6 +40,16 @@ export type Note = {
   content: string;
 };
 
+export class ApiError extends Error {
+  status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
+  }
+}
+
 export function getToken(): string | null {
   if (typeof window === "undefined") {
     return null;
@@ -79,15 +89,21 @@ export async function apiFetch<T>(
     }
   }
 
-  const response = await fetch(`${API_BASE}${path}`, {
-    ...init,
-    headers,
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE}${path}`, {
+      ...init,
+      headers,
+    });
+  } catch {
+    throw new ApiError("Network error. Please try again.", 0);
+  }
 
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(
+    throw new ApiError(
       parseErrorMessage(text) || `Request failed with status ${response.status}`,
+      response.status,
     );
   }
 

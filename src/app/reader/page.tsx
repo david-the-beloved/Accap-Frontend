@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import ReadingGoalForm from "@/components/goals/ReadingGoalForm";
 import NotesPanel from "@/components/notes/NotesPanel";
 import {
+  ApiError,
   clearToken,
   getLatestReadingProgress,
   getMe,
@@ -136,9 +137,16 @@ export default function ReaderPage() {
           setCurrentPage(1);
           setCurrentChapter("Unknown");
         }
-      } catch {
-        clearToken();
-        router.replace("/login");
+      } catch (error) {
+        if (error instanceof ApiError && (error.status === 401 || error.status === 403)) {
+          clearToken();
+          router.replace("/login");
+          return;
+        }
+
+        setCheckpointStatus(
+          "Temporary server issue while restoring session. Please retry in a few seconds.",
+        );
       } finally {
         setIsCheckingAuth(false);
       }
